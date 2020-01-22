@@ -53,7 +53,7 @@ class SearchEnterprisesTest: XCTestCase {
         
         api.search(text: "aQm")
             .map(\.data)
-            .decode(type: EnterpriseResponse.self, decoder: jsonDecoder)
+            .decode(type: ListEnterpriseResponse.self, decoder: jsonDecoder)
             .map { .success($0.enterprises) }
             .catch { Just(Result.failure($0)) }
             .sink { (result) in

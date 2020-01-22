@@ -11,7 +11,7 @@ import Combine
 
 protocol LoginNetworkProtocol {
     
-    func login(email: String, password: String) -> AnyPublisher<(data: Data, response: URLResponse), URLError>
+    func login(email: String, password: String) -> AnyPublisher<APIResponse, URLError>
 }
 
 final class LoginService: Service<LoginNetworkProtocol>, LoginServiceProtocol  {

@@ -9,6 +9,8 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
+    
+    private let centerLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,5 +47,19 @@ private extension HomeViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearchButton))
         navigationItem.rightBarButtonItem?.tintColor = .white
+        
+        addCenterLabel()
+    }
+    
+    func addCenterLabel() {
+        centerLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(centerLabel)
+        
+        centerLabel.text = "Clique na busca para iniciar."
+        
+        NSLayoutConstraint.activate([
+            centerLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            centerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
 }

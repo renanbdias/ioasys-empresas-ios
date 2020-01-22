@@ -41,19 +41,16 @@ final class LoginViewModel {
 // MARK: - LoginViewInterface
 extension LoginViewModel: LoginViewInterface {
     
-    var loginRequest: AnyPublisher<Void, Never> {
+    var loginRequest: AnyPublisher<Result<Void, Never>, Never> {
         loginPublisher.flatMap { [unowned self] (form) in self.service.login(email: form.email, password: form.password) }
             .receive(on: RunLoop.main)
             .handleEvents(receiveOutput: { [weak self] (result) in
-                switch result {
-                case .success(let investor):
-                    print(investor)
-                case .failure(let error):
+                if case .failure(let error) = result {
                     self?.showAlertFor(error: error)
                 }
                 self?.makingRequestRelay = false
             })
-            .map { _ in }
+            .map { _ in Result.success(()) }
             .eraseToAnyPublisher()
     }
     

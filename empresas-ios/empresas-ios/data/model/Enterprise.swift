@@ -6,9 +6,14 @@
 //  Copyright © 2020 empresas. All rights reserved.
 //
 
-struct EnterpriseResponse: Codable {
+struct ListEnterpriseResponse: Codable {
     
     let enterprises: [Enterprise]
+}
+
+struct EnterpriseResponse: Codable {
+    
+    let enterprise: Enterprise
 }
 
 struct Enterprise: Codable {

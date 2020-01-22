@@ -47,6 +47,18 @@ final class SearchViewController: UITableViewController {
             }
             .store(in: &cancelables)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchBar.becomeFirstResponder()
+    }
+    
+    private func goToDetailsWith(id: Int) {
+        let service = DetailsViewService(network: EnterpriseRoutes())
+        let viewModel = DetailsViewModel(id: id, service: service)
+        let detailsViewController = DetailsViewController(viewModel: viewModel)
+        navigationController?.pushViewController(detailsViewController, animated: true)
+    }
 }
 
 // MARK: - UI
@@ -90,6 +102,7 @@ extension SearchViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        goToDetailsWith(id: viewModel.cellViewModels[indexPath.row].id)
     }
 }
 

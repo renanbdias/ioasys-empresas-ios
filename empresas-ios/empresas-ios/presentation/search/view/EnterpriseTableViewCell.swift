@@ -10,6 +10,7 @@ import UIKit
 
 protocol EnterpriseTableViewCellInterface {
     
+    var id: Int { get }
     var shortenedName: String { get }
     var name: String { get }
     var type: String { get }

@@ -22,6 +22,8 @@ final class SearchViewModel {
     
     private let service: SearchEnterpriseServiceInterface
     
+    // MARK: Loading
+    
     init(service: SearchEnterpriseServiceInterface) {
         self.service = service
     }
@@ -42,6 +44,7 @@ extension SearchViewModel: SearchViewInterface {
             .map {
                 switch $0 {
                 case .success(let enterprises):
+                    // MARK: TODO empty cells
                     return enterprises.map(EnterpriseTableViewCellViewModel.init(enterprise:))
                     
                 case .failure(let error):

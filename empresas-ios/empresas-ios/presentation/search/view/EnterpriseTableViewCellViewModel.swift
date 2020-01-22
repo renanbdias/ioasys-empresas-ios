@@ -8,6 +8,7 @@
 
 struct EnterpriseTableViewCellViewModel: EnterpriseTableViewCellInterface {
     
+    let id: Int
     let shortenedName: String
     let name: String
     let type: String
@@ -17,6 +18,7 @@ struct EnterpriseTableViewCellViewModel: EnterpriseTableViewCellInterface {
 extension EnterpriseTableViewCellViewModel {
     
     init(enterprise: Enterprise) {
+        self.id = enterprise.id
         self.shortenedName = "E1" // MARK: - TODO
         self.name = enterprise.enterpriseName
         self.type = enterprise.enterpriseType.enterpriseTypeName

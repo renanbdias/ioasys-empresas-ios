@@ -69,12 +69,15 @@ class empresas_iosTests: XCTestCase {
             .map { Result.success($0) }
             .catch { Just(Result.failure($0)) }
             .sink { (result) in
-                if case .success(let result) = result {
+                switch result {
+                case .success(let result):
                     print(result.data)
                     let response = result.response as! HTTPURLResponse
                     if response.statusCode == 200 {
                         expectationSuccess.fulfill()
                     }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
             .store(in: &cancelables)

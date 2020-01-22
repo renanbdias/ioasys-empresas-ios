@@ -13,11 +13,9 @@ protocol LoginViewInterface {
  
     var emailViewModel: TextFieldWithIconViewModel { get }
     var passwordViewModel: TextFieldWithIconViewModel { get }
-    var loginRequest: AnyPublisher<Void, Never> { get }
+    var loginRequest: AnyPublisher<Result<Void, Never>, Never> { get }
     var showAlert: AnyPublisher<UIAlertController, Never> { get }
-    
     var makingRequest: AnyPublisher<Bool, Never> { get }
-    
     var welcome: String { get }
     var description: String { get }
     var buttonTitle: String { get }
@@ -63,9 +61,20 @@ final class LoginViewController: UIViewController {
         view.addGestureRecognizer(viewTap)
     }
     
+    private func goToHome() {
+        let viewController = HomeViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
+    
     private func bind() {
         viewModel.loginRequest
-            .sink(receiveValue: {})
+            .sink { [weak self] (result) in
+                if case .success = result {
+                    self?.goToHome()
+                }
+            }
             .store(in: &cancelables)
         
         viewModel.showAlert

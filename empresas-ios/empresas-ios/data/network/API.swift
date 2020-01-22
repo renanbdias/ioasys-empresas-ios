@@ -49,6 +49,7 @@ extension API {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         return URLSession.shared.dataTaskPublisher(for: request)
+            .handleEvents(receiveOutput: { print($1) })
             .eraseToAnyPublisher()
     }
     
@@ -63,6 +64,7 @@ extension API {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         return URLSession.shared.dataTaskPublisher(for: request)
+            .handleEvents(receiveOutput: { print($1) })
             .eraseToAnyPublisher()
     }
 }

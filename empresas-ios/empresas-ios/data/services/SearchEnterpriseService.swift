@@ -11,7 +11,7 @@ import Combine
 
 protocol SearchEnterpriseNetworkInterface {
     
-    func search(text: String) -> AnyPublisher<(data: Data, response: URLResponse), URLError>
+    func search(text: String) -> AnyPublisher<APIResponse, URLError>
 }
 
 final class SearchEnterpriseService: Service<SearchEnterpriseNetworkInterface>, SearchEnterpriseServiceInterface {
@@ -19,7 +19,7 @@ final class SearchEnterpriseService: Service<SearchEnterpriseNetworkInterface>, 
     func search(text: String) -> AnyPublisher<Result<[Enterprise], Error>, Never> {
         network.search(text: text)
             .map(\.data)
-            .decode(type: EnterpriseResponse.self, decoder: jsonDecoder)
+            .decode(type: ListEnterpriseResponse.self, decoder: jsonDecoder)
             .map { .success($0.enterprises) }
             .catch { Just(.failure($0)) }
             .eraseToAnyPublisher()

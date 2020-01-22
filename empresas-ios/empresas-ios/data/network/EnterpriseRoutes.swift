@@ -23,3 +23,11 @@ extension EnterpriseRoutes: SearchEnterpriseNetworkInterface {
         get(url: url, queries: ["name": text, "enterprise_types": "1"])
     }
 }
+
+// MARK: - DetailsNetworkInterface
+extension EnterpriseRoutes: DetailsNetworkInterface {
+    
+    func getEnterpriseWith(id: Int) -> AnyPublisher<APIResponse, URLError> {
+        get(url: url.appendingPathComponent("\(id)"))
+    }
+}
