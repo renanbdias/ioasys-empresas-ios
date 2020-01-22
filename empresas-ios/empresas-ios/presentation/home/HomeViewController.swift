@@ -16,7 +16,9 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func didTapSearchButton() {
-        let viewModel = SearchViewModel()
+        let network = EnterpriseRoutes()
+        let service = SearchEnterpriseService(network: network)
+        let viewModel = SearchViewModel(service: service)
         let searchViewController = SearchViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: searchViewController)
         navigationController.modalPresentationStyle = .fullScreen

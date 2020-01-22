@@ -12,6 +12,12 @@ class Service<T> {
     
     let network: T
     
+    let jsonDecoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
+    
     init(network: T) {
         self.network = network
     }

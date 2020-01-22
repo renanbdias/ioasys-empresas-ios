@@ -14,7 +14,6 @@ protocol SearchViewInterface {
     var cellViewModels: [EnterpriseTableViewCellInterface] { get }
     var numberOfRows: Int { get }
     var reload: AnyPublisher<Void, Never> { get }
-//    var searchRequest: AnyPublisher<Void, Never> { get }
     
     func textDidChange(_ text: String)
 }
@@ -55,6 +54,9 @@ private extension SearchViewController {
     
     func applyLayout() {
         addSearchBar()
+        
+        tableView.separatorStyle = .none
+        
         navigationController?.navigationBar.barTintColor = .darkishPink
         
         view.backgroundColor = .beige
@@ -75,7 +77,7 @@ private extension SearchViewController {
 extension SearchViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        viewModel.cellViewModels.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,9 +102,10 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+        dismiss(animated: true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+        view.endEditing(true)
     }
 }

@@ -6,43 +6,56 @@
 //  Copyright © 2020 empresas. All rights reserved.
 //
 
+import Foundation
 import Combine
 
 protocol SearchEnterpriseServiceInterface {
     
-//    func login(email: String, password: String) -> AnyPublisher<Result<Investor, Error>, Never>
-//    func search(text: String) -> AnyPublisher<Result<>>
+    func search(text: String) -> AnyPublisher<Result<[Enterprise], Error>, Never>
 }
 
 final class SearchViewModel {
     
     @Published var searchText: String = ""
     
-//    @Published var cellViewModels: [CompanyTableViewCellInterface] = []
     var cellViewModels: [EnterpriseTableViewCellInterface] = []
     
-//    private let service: SearchEnterpriseServiceInterface
+    private let service: SearchEnterpriseServiceInterface
     
-//    init(service: SearchEnterpriseServiceInterface) {
-//        self.service = service
-//    }
+    init(service: SearchEnterpriseServiceInterface) {
+        self.service = service
+    }
 }
 
 // MARK: - SearchViewInterface
 extension SearchViewModel: SearchViewInterface {
-    
-//    var cellViewModels: [CompanyTableViewCellInterface] {
-//
-//    }
     
     var numberOfRows: Int {
         cellViewModels.count
     }
     
     var reload: AnyPublisher<Void, Never> {
-//        $cellViewModels.map { _ in }.eraseToAnyPublisher()
-//        $searchText.flatMap {  }
-        Just(()).eraseToAnyPublisher()
+        $searchText.debounce(for: 0.5, scheduler: RunLoop.main)
+            .filter { !$0.isEmpty && $0.count >= 3 }
+            .flatMap { [unowned self] in self.service.search(text: $0) }
+            .receive(on: RunLoop.main)
+            .map {
+                switch $0 {
+                case .success(let enterprises):
+                    return enterprises.map(EnterpriseTableViewCellViewModel.init(enterprise:))
+                    
+                case .failure(let error):
+                    // MARK: Error cell
+                    // Log on crashlytics?
+                    print(error.localizedDescription)
+                    return []
+                }
+            }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.cellViewModels = $0
+            })
+            .map { _ in }
+            .eraseToAnyPublisher()
     }
     
     func textDidChange(_ text: String) {

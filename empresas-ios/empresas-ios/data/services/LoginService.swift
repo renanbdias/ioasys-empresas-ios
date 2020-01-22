@@ -14,17 +14,7 @@ protocol LoginNetworkProtocol {
     func login(email: String, password: String) -> AnyPublisher<(data: Data, response: URLResponse), URLError>
 }
 
-final class LoginService: Service<LoginNetworkProtocol> {
-    
-    private let jsonDecoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
-}
-
-// MARK: - LoginServiceProtocol
-extension LoginService: LoginServiceProtocol {
+final class LoginService: Service<LoginNetworkProtocol>, LoginServiceProtocol  {
     
     func login(email: String, password: String) -> AnyPublisher<Result<Investor, Error>, Never> {
         network.login(email: email, password: password)

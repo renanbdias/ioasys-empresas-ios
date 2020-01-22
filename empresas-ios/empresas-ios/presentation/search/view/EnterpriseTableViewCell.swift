@@ -44,6 +44,7 @@ private extension EnterpriseTableViewCell {
         
         shortenedNameLabel.textColor = .white
         shortenedNameLabel.font = UIFont.systemFont(ofSize: 32)
+        shortenedNameLabel.textAlignment = .center
         
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         

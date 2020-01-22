@@ -38,6 +38,10 @@
 		84BFFCE623D6A698007A1D3C /* UserRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFFCE523D6A698007A1D3C /* UserRoutes.swift */; };
 		84BFFCE923D6AB75007A1D3C /* Investor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFFCE823D6AB75007A1D3C /* Investor.swift */; };
 		84F06A3123D8053B00DE54DB /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F06A3023D8053B00DE54DB /* Service.swift */; };
+		84F06A3323D88D6E00DE54DB /* Enterprise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F06A3223D88D6E00DE54DB /* Enterprise.swift */; };
+		84F06A3523D88E3D00DE54DB /* EnterpriseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F06A3423D88E3D00DE54DB /* EnterpriseType.swift */; };
+		84F06A3723D890D700DE54DB /* SearchEnterprisesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F06A3623D890D700DE54DB /* SearchEnterprisesTest.swift */; };
+		84F06A3923D8A06500DE54DB /* EnterpriseTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F06A3823D8A06500DE54DB /* EnterpriseTableViewCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +99,10 @@
 		84BFFCE523D6A698007A1D3C /* UserRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRoutes.swift; sourceTree = "<group>"; };
 		84BFFCE823D6AB75007A1D3C /* Investor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Investor.swift; sourceTree = "<group>"; };
 		84F06A3023D8053B00DE54DB /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		84F06A3223D88D6E00DE54DB /* Enterprise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enterprise.swift; sourceTree = "<group>"; };
+		84F06A3423D88E3D00DE54DB /* EnterpriseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseType.swift; sourceTree = "<group>"; };
+		84F06A3623D890D700DE54DB /* SearchEnterprisesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEnterprisesTest.swift; sourceTree = "<group>"; };
+		84F06A3823D8A06500DE54DB /* EnterpriseTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterpriseTableViewCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 		847D6FC923D7F50A00CC6EF1 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				84F06A3823D8A06500DE54DB /* EnterpriseTableViewCellViewModel.swift */,
 				847D6FCA23D7F59100CC6EF1 /* EnterpriseTableViewCell.swift */,
 				847D6FCB23D7F59100CC6EF1 /* EnterpriseTableViewCell.xib */,
 			);
@@ -188,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				84BFFCAB23D6757B007A1D3C /* empresas_iosTests.swift */,
+				84F06A3623D890D700DE54DB /* SearchEnterprisesTest.swift */,
 				84BFFCAD23D6757B007A1D3C /* Info.plist */,
 			);
 			path = "empresas-iosTests";
@@ -297,6 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				84BFFCE823D6AB75007A1D3C /* Investor.swift */,
+				84F06A3223D88D6E00DE54DB /* Enterprise.swift */,
+				84F06A3423D88E3D00DE54DB /* EnterpriseType.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -439,6 +451,7 @@
 				84BFFC9523D67578007A1D3C /* AppDelegate.swift in Sources */,
 				84BFFCD623D69365007A1D3C /* TextFieldWithIconViewModel.swift in Sources */,
 				84BFFCE623D6A698007A1D3C /* UserRoutes.swift in Sources */,
+				84F06A3923D8A06500DE54DB /* EnterpriseTableViewCellViewModel.swift in Sources */,
 				847D6FC623D7DAF000CC6EF1 /* UIButton+UIActivityIndicatorView.swift in Sources */,
 				847D6FCF23D7F98900CC6EF1 /* SearchViewModel.swift in Sources */,
 				847D6FCC23D7F59100CC6EF1 /* EnterpriseTableViewCell.swift in Sources */,
@@ -456,7 +469,9 @@
 				84BFFCD223D68D0B007A1D3C /* TextFieldWithIconView.swift in Sources */,
 				84BFFCD923D69E23007A1D3C /* KeyboardListanable.swift in Sources */,
 				847D6FD323D800C400CC6EF1 /* SearchEnterpriseService.swift in Sources */,
+				84F06A3523D88E3D00DE54DB /* EnterpriseType.swift in Sources */,
 				847D6FD623D8026000CC6EF1 /* URL+URLComponents.swift in Sources */,
+				84F06A3323D88D6E00DE54DB /* Enterprise.swift in Sources */,
 				84BFFCCF23D68350007A1D3C /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +480,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F06A3723D890D700DE54DB /* SearchEnterprisesTest.swift in Sources */,
 				84BFFCAC23D6757B007A1D3C /* empresas_iosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

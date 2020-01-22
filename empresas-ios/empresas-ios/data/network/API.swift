@@ -34,7 +34,21 @@ extension API {
             queries.forEach { finalURL = url.appending($0, value: $1) }
         }
         
-        return URLSession.shared.dataTaskPublisher(for: URLRequest(url: finalURL, cachePolicy: cachePolicy))
+        var request = URLRequest(url: finalURL, cachePolicy: cachePolicy)
+        
+        // MARK: Refactor later
+        let authManager = AuthManager.shared
+        
+        if authManager.authenticated {
+            request.setValue(authManager.accessToken, forHTTPHeaderField: "access-token")
+            request.setValue(authManager.client, forHTTPHeaderField: "client")
+            request.setValue(authManager.uid, forHTTPHeaderField: "uid")
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
             .eraseToAnyPublisher()
     }
     

@@ -20,7 +20,7 @@
                         <rect key="frame" x="12" y="22" width="90" height="69"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2co-CC-ldF">
-                                <rect key="frame" x="24" y="24" width="42" height="21"/>
+                                <rect key="frame" x="8" y="8" width="74" height="53"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -28,10 +28,11 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="69" id="JYc-pG-rWu"/>
-                            <constraint firstItem="2co-CC-ldF" firstAttribute="centerX" secondItem="VDT-0o-Qg1" secondAttribute="centerX" id="X8S-Mr-Qii"/>
+                            <constraint firstItem="2co-CC-ldF" firstAttribute="top" secondItem="VDT-0o-Qg1" secondAttribute="top" constant="8" id="9ej-6p-do4"/>
+                            <constraint firstItem="2co-CC-ldF" firstAttribute="leading" secondItem="VDT-0o-Qg1" secondAttribute="leading" constant="8" id="CIt-gZ-gmN"/>
                             <constraint firstAttribute="width" constant="90" id="ZdU-pU-KI3"/>
-                            <constraint firstItem="2co-CC-ldF" firstAttribute="centerY" secondItem="VDT-0o-Qg1" secondAttribute="centerY" id="mrz-hJ-s2S"/>
+                            <constraint firstAttribute="trailing" secondItem="2co-CC-ldF" secondAttribute="trailing" constant="8" id="cdz-QD-E0j"/>
+                            <constraint firstAttribute="bottom" secondItem="2co-CC-ldF" secondAttribute="bottom" constant="8" id="hkZ-Yz-7I1"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGU-TL-JvF">
@@ -54,15 +55,16 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="8eg-8Y-dpu" firstAttribute="leading" secondItem="g3Y-2h-xuB" secondAttribute="leading" id="5kA-yq-THT"/>
                     <constraint firstItem="g3Y-2h-xuB" firstAttribute="top" secondItem="wGU-TL-JvF" secondAttribute="bottom" constant="8" id="FUY-We-suj"/>
                     <constraint firstItem="VDT-0o-Qg1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Ip4-nB-uGe"/>
                     <constraint firstItem="8eg-8Y-dpu" firstAttribute="top" secondItem="g3Y-2h-xuB" secondAttribute="bottom" constant="2" id="Jyv-dW-TtQ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8eg-8Y-dpu" secondAttribute="trailing" constant="17" id="Mmd-Kv-GUC"/>
                     <constraint firstItem="VDT-0o-Qg1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="OBT-qy-dYc"/>
+                    <constraint firstItem="g3Y-2h-xuB" firstAttribute="leading" secondItem="wGU-TL-JvF" secondAttribute="leading" id="W5E-eD-rYF"/>
                     <constraint firstItem="wGU-TL-JvF" firstAttribute="leading" secondItem="VDT-0o-Qg1" secondAttribute="trailing" constant="17" id="YtC-Av-ZCp"/>
                     <constraint firstAttribute="trailingMargin" secondItem="g3Y-2h-xuB" secondAttribute="trailing" constant="17" id="diA-kx-rm7"/>
-                    <constraint firstItem="g3Y-2h-xuB" firstAttribute="leading" secondItem="VDT-0o-Qg1" secondAttribute="trailing" constant="17" id="dtt-Tq-cTs"/>
-                    <constraint firstItem="8eg-8Y-dpu" firstAttribute="leading" secondItem="VDT-0o-Qg1" secondAttribute="trailing" constant="17" id="ndN-wo-gxx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="8eg-8Y-dpu" secondAttribute="bottom" constant="6" id="kmf-4o-Plx"/>
                     <constraint firstItem="wGU-TL-JvF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="sfX-HH-n4g"/>
                     <constraint firstAttribute="trailing" secondItem="wGU-TL-JvF" secondAttribute="trailing" constant="17" id="u6L-42-4l6"/>
                     <constraint firstAttribute="bottom" secondItem="VDT-0o-Qg1" secondAttribute="bottom" constant="22" id="xV1-12-kqM"/>
