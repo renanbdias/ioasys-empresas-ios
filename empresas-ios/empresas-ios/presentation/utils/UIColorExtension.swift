@@ -20,4 +20,8 @@ public extension UIColor {
     static let beige = UIColor(named: "beige")
     
     static let charcoalGrey = UIColor(named: "charcoalGrey")
+    
+    static let softGreen = UIColor(named: "softGreen")
+    
+    static let warmGrey = UIColor(named: "warmGrey")
 }

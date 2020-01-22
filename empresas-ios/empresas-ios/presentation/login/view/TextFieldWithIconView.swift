@@ -14,6 +14,8 @@ protocol TextFieldWithIconViewInterface {
     var placeHolder: String { get }
     var icon: UIImage { get }
     var text: String { get set }
+    var keyboardType: UIKeyboardType { get }
+    var isSecureTextEntry: Bool { get }
 }
 
 final class TextFieldWithIconView: UIView {
@@ -34,12 +36,13 @@ final class TextFieldWithIconView: UIView {
         
         iconImageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
         textField.placeholder = viewModel.placeHolder
+        textField.keyboardType = viewModel.keyboardType
+        textField.isSecureTextEntry = viewModel.isSecureTextEntry
         
         textField.publisher(for: \.text)
             .filter { $0 != nil }
             .map { $0! }
             .sink { [unowned self] (text) in
-//                self.viewModel?.text.send(text)
                 self.viewModel?.text = text
             }
             .store(in: &cancellables)
@@ -52,7 +55,6 @@ final class TextFieldWithIconView: UIView {
 private extension TextFieldWithIconView {
     
     func applyLayout() {
-        textField.keyboardType = .emailAddress
         textField.borderStyle = .none
         textField.tintColor = .charcoalGrey
         

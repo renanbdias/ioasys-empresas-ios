@@ -13,11 +13,15 @@ final class TextFieldWithIconViewModel: TextFieldWithIconViewInterface {
     
     var text: String = ""
     
-    var placeHolder: String
-    var icon: UIImage
+    let placeHolder: String
+    let icon: UIImage
+    let keyboardType: UIKeyboardType
+    let isSecureTextEntry: Bool
     
-    init(placeHolder: String, icon: UIImage) {
+    init(placeHolder: String, icon: UIImage, keyboardType: UIKeyboardType = .default, isSecureTextEntry: Bool = false) {
         self.placeHolder = placeHolder
         self.icon = icon
+        self.keyboardType = keyboardType
+        self.isSecureTextEntry = isSecureTextEntry
     }
 }

@@ -9,6 +9,22 @@
 import UIKit
 import Combine
 
+protocol LoginViewInterface {
+ 
+    var emailViewModel: TextFieldWithIconViewModel { get }
+    var passwordViewModel: TextFieldWithIconViewModel { get }
+    var loginRequest: AnyPublisher<Void, Never> { get }
+    var showAlert: AnyPublisher<UIAlertController, Never> { get }
+    
+    var makingRequest: AnyPublisher<Bool, Never> { get }
+    
+    var welcome: String { get }
+    var description: String { get }
+    var buttonTitle: String { get }
+    
+    func didTapEnter()
+}
+
 final class LoginViewController: UIViewController {
     
     @IBOutlet weak var logoImageView: UIImageView!
@@ -19,12 +35,20 @@ final class LoginViewController: UIViewController {
     
     private let enterButton = UIButton(frame: .zero)
     
-    private let emailViewModel = TextFieldWithIconViewModel(placeHolder: "E-mail", icon: #imageLiteral(resourceName: "icEmail"))
-    private let passwordViewModel = TextFieldWithIconViewModel(placeHolder: "Senha", icon: #imageLiteral(resourceName: "icCadeado"))
-    
     private var enterButtonbottomConstraint = NSLayoutConstraint()
     
-    var cancelables = Set<AnyCancellable>()
+    private let viewModel: LoginViewInterface
+    
+    private var cancelables = Set<AnyCancellable>()
+    
+    init(viewModel: LoginViewInterface) {
+        self.viewModel = viewModel
+        super.init(nibName: "LoginViewController", bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +57,33 @@ final class LoginViewController: UIViewController {
         listenToKeyboardEvents(cancelablesSet: &cancelables)
         addFormFields()
         
+        bind()
+        
         let viewTap = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         view.addGestureRecognizer(viewTap)
     }
     
+    private func bind() {
+        viewModel.loginRequest
+            .sink(receiveValue: {})
+            .store(in: &cancelables)
+        
+        viewModel.showAlert
+            .sink { [weak self] (alert) in
+                self?.present(alert, animated: true)
+            }
+            .store(in: &cancelables)
+        
+        viewModel.makingRequest
+            .sink { [weak self] (makingRequest) in
+                self?.enterButton.loadingIndicator(makingRequest)
+            }
+            .store(in: &cancelables)
+    }
+    
     @objc func didTapEnterButton() {
-        // MARK: TODO
-        print("TODO")
         view.endEditing(true)
+        viewModel.didTapEnter()
     }
     
     @objc func didTapView() {
@@ -48,6 +91,7 @@ final class LoginViewController: UIViewController {
     }
 }
 
+// MARK: - KeyboardListanable
 extension LoginViewController: KeyboardListanable {
     
     func keyboardDidUpdate(notification: Notification) {
@@ -80,12 +124,12 @@ private extension LoginViewController {
     }
     
     func welcomeLayout() {
-        welcomeLabel.text = "BEM-VINDO AO EMPRESAS"
+        welcomeLabel.text = viewModel.welcome
         welcomeLabel.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     func descriptionLayout() {
-        descriptionLabel.text = "Lorem ipsum dolor sit amet, contetur adipiscing elit. Nunc accumsan."
+        descriptionLabel.text = viewModel.description
         descriptionLabel.font = UIFont.systemFont(ofSize: 15)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
@@ -93,7 +137,7 @@ private extension LoginViewController {
     
     func enterButtonLayout() {
         enterButton.backgroundColor = .greenyBlue
-        enterButton.setTitle("ENTRAR", for: .normal)
+        enterButton.setTitle(viewModel.buttonTitle, for: .normal)
         enterButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         enterButton.tintColor = .white
         enterButton.layer.cornerRadius = 6
@@ -109,13 +153,13 @@ private extension LoginViewController {
     }
     
     func addEmailField() {
-        let emailField = TextFieldWithIconView.loadNib(with: emailViewModel)
+        let emailField = TextFieldWithIconView.loadNib(with: viewModel.emailViewModel)
         emailField.snapToEdges(of: emailContainerView)
         emailContainerView.backgroundColor = .clear
     }
     
     func addPasswordField() {
-        let passwordField = TextFieldWithIconView.loadNib(with: passwordViewModel)
+        let passwordField = TextFieldWithIconView.loadNib(with: viewModel.passwordViewModel)
         passwordField.snapToEdges(of: passwordContainerView)
         passwordContainerView.backgroundColor = .clear
     }
